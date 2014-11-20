@@ -1,0 +1,34 @@
+{% extends "forecast/base.html" %}
+
+
+{% block content %}
+
+{% if error_msg %}
+    {{ error_msg }}
+{% endif %}
+
+<h1>Current Conditions</h1>
+
+{% for city, values in data.items %}
+{% if forloop.counter|divisibleby:2 %}
+<div id="right">
+{% else %}
+<div id="left">
+{% endif %}
+
+<table id="{{ city }}">
+    <tr>
+        <th colspan=2>{{ city }}</th>
+    </tr>
+    {% for key, value in values.items %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% endfor %}
+
+
+{% endblock %}
